@@ -22,7 +22,7 @@ class ProjectController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'projects' => Type::all()
+            'result' => Type::all()
         ]);
     }
 
@@ -30,7 +30,7 @@ class ProjectController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'projects' => Technology::all()
+            'result' => Technology::all()
         ]);
     }
 }

@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Type;
 use App\Models\Technology;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
     public function projects()
     {
         return response()->json([
-            'status' => 'true',
-            'result' => Project::with('types', 'technologies')->orderByDesc('id')
+            'status' => 'success',
+            'result' => Project::with('types', 'technologies')->orderByDesc('id')->paginate(12)
         ]);
     }
 
@@ -22,7 +22,7 @@ class ProjectController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'result' => Type::all()
+            'result' => Type::with('projects')
         ]);
     }
 
@@ -30,7 +30,7 @@ class ProjectController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'result' => Technology::all()
+            'result' => Technology::with('projects')
         ]);
     }
 }

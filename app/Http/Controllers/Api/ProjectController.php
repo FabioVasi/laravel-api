@@ -13,8 +13,8 @@ class ProjectController extends Controller
     public function projects()
     {
         return response()->json([
-            'status' => 'success',
-            'result' => Project::with('types', 'technologies')->orderByDesc('id')->paginate(12)
+            'status' => 'true',
+            'result' => Project::with('types', 'technologies')->orderByDesc('id')
         ]);
     }
 

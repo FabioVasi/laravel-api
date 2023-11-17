@@ -17,7 +17,7 @@ class TechnologySeeder extends Seeder
         $technologies = ['html', 'css', 'bootstrap', 'js', 'debugging', 'vite', 'php', 'db', 'mysql', 'laravel'];
 
         foreach ($technologies as $technology) {
-            if(Technology::where('name','=',$technology)->exists()) {
+            if(!Technology::where('name','=',$technology)->exists()) {
                 $new_technology = new Technology();
                 $new_technology->name = $technology;
                 $new_technology->slug = Str::slug($new_technology->name, '-');

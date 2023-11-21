@@ -18,19 +18,27 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function types()
+    public function show($slug) 
     {
-        return response()->json([
-            'status' => 'success',
-            'result' => Type::with('projects')
-        ]);
+        $project = Project::with('types', 'technologies')->where('slug', $slug)->paginate();
+        if($project) {
+            return response()->json([
+                'success' => true,
+                'result' => $project
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'result' => 'Page not Found'
+            ]);
+        }
     }
 
-    public function technologies()
+    public function latest()
     {
         return response()->json([
-            'status' => 'success',
-            'result' => Technology::with('projects')
+            'success' => true,
+            'result' => Project::with('types', 'technologies')->orderByDesc('id')->take(3)->get()
         ]);
     }
 }

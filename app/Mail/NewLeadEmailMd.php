@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -13,12 +14,14 @@ class NewLeadEmailMd extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $lead;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($lead)
     {
-        //
+        $this->lead = $lead;
     }
 
     /**
@@ -27,7 +30,9 @@ class NewLeadEmailMd extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Lead Email Md',
+            from: new Address('hello@example.com', 'Admin Example'),
+            replyTo: '',
+            subject: 'New Lead Email',
         );
     }
 
@@ -37,7 +42,7 @@ class NewLeadEmailMd extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            markdown: 'mail.new-lead-email-md',
         );
     }
 

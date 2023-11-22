@@ -17,10 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('guests.welcome');
+    return redirect()->route('login');
 });
 
 
+
+Route::get('/mailable', function () {
+    $lead = App\Models\Lead::find(1);
+
+    //    return new App\Mail\NewLeadEmail($lead);
+    return new App\Mail\NewLeadEmailMd($lead);
+});
 // admin routes // all routes start with: '/admin/..'
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');

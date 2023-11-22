@@ -25,14 +25,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::get('/projects', [ProjectController::class, 'projects']);
+Route::get('/projects', [ProjectController::class, 'index']);
 Route::get('projects/latest', [ProjectController::class, 'latest']);
 Route::get('projects/{project:slug', [ProjectController::class, 'show']);
 
-Route::get('/types', [TypeController::class, 'types']);
+Route::get('/types', [TypeController::class, 'index']);
 Route::get('types/{type:slug', [TypeController::class, 'show']);
 
-Route::get('/technologies', [TechnologyController::class, 'technologies']);
+Route::get('/technologies', [TechnologyController::class, 'index']);
 Route::get('technologies/{technology:slug', [TechnologyController::class, 'show']);
 
 Route::post('/contacts', [LeadController::class, 'store']);

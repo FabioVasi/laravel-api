@@ -28,6 +28,9 @@ Route::get('/mailable', function () {
     //    return new App\Mail\NewLeadEmail($lead);
     return new App\Mail\NewLeadEmailMd($lead);
 });
+
+
+
 // admin routes // all routes start with: '/admin/..'
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -35,6 +38,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         'projects' => 'project:slug'
     ]);
 });
+
 
 
 // profile routes
